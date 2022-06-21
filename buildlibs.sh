@@ -12,7 +12,7 @@ if [ "$BUILD_IOS" == "1" ]; then
   export CXX=$thecxx
   ./configure \
     --host=$TARGET \
-    --prefix=/data/data/bin.mt.plus/files/term/usr \
+    --prefix=${PWD}/build_android-${TARGET_SHORT} \
     --enable-shared=no --enable-static=yes \
     --without-zlib \
     --with-brotli=no \
@@ -27,7 +27,7 @@ else
   export PATH=$TOOLCHAIN/bin:$PATH
   ./configure \
     --host=$TARGET \
-    --prefix=/data/data/bin.mt.plus/files/term/usr \
+    --prefix=${PWD}/build_android-${TARGET_SHORT} \
     --without-zlib \
     --with-png=no \
     --with-harfbuzz=no $EXTRA_ARGS \
