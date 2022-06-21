@@ -1,63 +1,82 @@
-# Boardwalk: a Minecraft Java Edition launcher for Android
+# mobile-openjdk8-build-multiarch
 
-This is the source code for Boardwalk, a Minecraft Java Edition launcher for Android.
+Based on http://openjdk.java.net/projects/mobile/android.html
 
-CI status of just the login screen:
+## Building 
 
-![Build Status](https://github.com/zhuowei/Boardwalk/workflows/Build%20Boardwalk/badge.svg)
+### Setup
+#### Android
+- Download Android NDK r10e from https://developer.android.com/ndk/downloads/older_releases.html and place it in this directory (Can't automatically download because of EULA)
+- **Warning**: Do not attempt to build use newer or older NDK, it will lead to compilation errors.
 
-(There's currently no plan to get Boardwalk 2.0 working. Sorry :( )
+#### iOS
+- You should get latest Xcode (tested with Xcode 12).
 
-# Branches
+### Platform and architecture specific environment variables
+<table>
+      <thead>
+        <tr>
+          <th></th>
+          <th align="center" colspan="7">Environment variables</th>
+        </tr>
+        <tr>
+          <th>Platform - Architecture</th>
+          <th align="center">TARGET</th>
+          <th align="center">TARGET_JDK</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Android - armv8/aarch64</td>
+          <td align="center">aarch64-linux-android</td>
+          <td align="center">aarch64</td>
+        </tr>
+        <tr>
+          <td>Android - armv7/aarch32</td>
+          <td align="center">arm-linux-androideabi</td>
+          <td align="center">arm</td>
+        </tr>
+        <tr>
+          <td>Android - x86/i686</td>
+          <td align="center">i686-linux-android</td>
+          <td align="center">x86</td>
+        </tr>
+        <tr>
+          <td>Android - x86_64/amd64</td>
+          <td align="center">x86_64-linux-android</td>
+          <td align="center">x86_64</td>
+        </tr>
+        <tr>
+          <td>iOS/iPadOS - armv8/aarch64</td>
+          <td align="center">aarch64-macos-ios</td>
+          <td align="center">aarch64</td>
+        </tr>
+      </tbody>
+	</table>
 
-This branch contains the source for Boardwalk 2.0 (the current development branch).
+### Run in this directory:
+```
+export BUILD_IOS=1 # only when targeting iOS, default is 0 (target Android)
 
-There are three branches of development:
+export BUILD_FREETYPE_VERSION=[2.6.2/.../2.10.4] # default: 2.10.4
+export JDK_DEBUG_LEVEL=[release/fastdebug/debug] # default: release
+export JVM_VARIANTS=[client/server] # default: client (aarch32), server (other architectures)
 
-- `master`: Boardwalk 1.0-1.2. Uses Android's own JVM. The only released version. Doesn't work on Android 7.x and above.
-- `boardwalk-1.9`: Boardwalk 1.9 beta. Uses Oracle's JDK. Abandoned.
-- `boardwalk-2.0`: Boardwalk 2.0. Uses OpenJDK's Android port. This is the latest version.
+# Setup NDK, run once (Android only)
+./extractndk.sh
+./maketoolchain.sh
 
-# Additional components
+# Get CUPS, Freetype and build Freetype
+./getlibs.sh
+./buildlibs.sh
 
-Some modified third-party components are in separate repositories:
+# Clone JDK, run once
+./clonejdk.sh
 
-- [LWJGL Android port](https://github.com/BoardwalkApp/boardwalk-lwjgl)
-- [lunixbochs' and ptitSeb's glShim](https://github.com/BoardwalkApp/boardwalk-glshim)
+# Configure JDK and build, if no configuration is changed, run makejdkwithoutconfigure.sh instead
+./buildjdk.sh
 
-## Building
-
-TODO - the current Boardwalk build process only works on my computer; I will post updated instructions soon.
-
-## Build LWJGL
-
-Build it
-
-copy liblwjgl32.so, liblwjgl_opengl32.so to app/libs/armeabi-v7a
-
-## Build lwjgl3override
-
-cd lwjgl3override
-./build
-
-## Build JVM
-
-build it, copy jre.tar.xz to app/src/main/assets/
-
-## Copy a Busybox
-
-Busybox in app/src/main/assets/busybox; should be statically linked.
-
-# License
-
-The source code in this repository is licensed under the Apache License, version 2.0 unless otherwise indicated in the file.
-
-This means you can use those files as long as you credit me.
-
-Some files and libraries are taken from third-party projects and have their own licenses. Please see the header of those files for their licenses.
-
-If you have any questions, please open an issue.
-
-# Code of Conduct
-
-This project is governed by the Contributor Covenant version 1.4(https://www.contributor-covenant.org/version/1/4/code-of-conduct.html).
+# Pack the built JDK
+./removejdkdebuginfo.sh
+./tarjdk.sh
+```
