@@ -24,7 +24,7 @@ mv jreout/lib/libfreetype.dylib.6 jreout/lib/libfreetype.dylib || echo "Move exi
 
 find jreout -name "*.diz" -delete
 find jdkout -name "*.diz" -exec mv {} dizout/ \;
-
+mkdir -p dizout
 if [ "$BUILD_IOS" == "1" ]; then
   install_name_tool -id @rpath/libfreetype.dylib jdkout/jre/lib/libfreetype.dylib
   install_name_tool -id @rpath/libfreetype.dylib jreout/lib/libfreetype.dylib
