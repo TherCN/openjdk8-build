@@ -58,7 +58,7 @@ ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
 
 cd openjdk
 #rm -rf build
-
+patch -p0 -i ../fix-libjava.patch
 #   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #   --with-extra-cflags="$CPPFLAGS" \
 #   --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
