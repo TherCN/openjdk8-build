@@ -48,7 +48,7 @@ else
   sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration"
   export CFLAGS+=" $sameflags"
   export CXXFLAGS="$sameflags"
-  export LDFLAGS+=" -miphoneos-version-min=12.0 -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/jvm/jre"
+  export LDFLAGS+=" -miphoneos-version-min=12.0 -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/jvm/jre/lib/aarch64"
 
   HOMEBREW_NO_AUTO_UPDATE=1 brew install ldid xquartz
 fi
@@ -92,9 +92,9 @@ if [ "$error_code" -ne 0 ]; then
 fi
 
 cd build/${JVM_PLATFORM}-${TARGET_JDK}-normal-${JVM_VARIANTS}-${JDK_DEBUG_LEVEL}
-make JOBS=4 images || \
+make JOBS=8 images || \
 error_code=$?
 if [ "$error_code" -ne 0 ]; then
   echo "Build failure, exited with code $error_code. Trying again."
-  make JOBS=4 images
+  make JOBS=8 images
 fi
