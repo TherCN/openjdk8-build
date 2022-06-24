@@ -5,7 +5,7 @@
                /* Fake it as best we can or should we punt? */
                JLI_TraceLauncher("SetExecName fake it = %s\n", argv[0]);
 -              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
-+              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/jvm/bin/java",
++              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/openjdk-8/bin/java",
                             argv[0]);
              }
            }
@@ -14,7 +14,7 @@
                /* Fake it as best we can or should we punt? */
                JLI_TraceLauncher("SetExecName fake it 2 = %s\n", argv[0]);
 -              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
-+              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/jvm/bin/java",
++              JLI_Snprintf(buf, PATH_MAX, "/data/data/bin.mt.plus/files/term/usr/share/openjdk-8/bin/java",
                             argv[0]);
              }
          }
