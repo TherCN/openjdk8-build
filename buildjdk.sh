@@ -70,7 +70,7 @@ bash ./configure \
     --openjdk-target=$TARGET_PHYS \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
-    --with-extra-ldflags="$LDFLAGS -rpath=/data/data/com.termux/files/usr/opt/openjdk-8/hre/lib/aarch64" \
+    --with-extra-ldflags="$LDFLAGS -Wl,-rpath=/data/data/com.termux/files/usr/opt/openjdk-8/hre/lib/aarch64" \
     --enable-option-checking=fatal \
     --with-jdk-variant=normal \
     --with-jvm-variants="${JVM_VARIANTS/AND/,}" \
