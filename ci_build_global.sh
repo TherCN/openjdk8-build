@@ -5,7 +5,7 @@ set -e
 export JDK_DEBUG_LEVEL=release
 
 if [ "$BUILD_IOS" != "1" ]; then
-  sudo apt-get update
+  sudo apt update
   sudo apt -y install autoconf python unzip zip
 
   wget -nc -nv -O android-ndk-$NDK_VERSION-linux-x86_64.zip "https://dl.google.com/android/repository/android-ndk-$NDK_VERSION-linux-x86_64.zip"
@@ -19,7 +19,6 @@ else
 fi
 
 # Some modifies to NDK to fix
-apt update
 ./getlibs.sh
 ./buildlibs.sh
 ./clonejdk.sh
