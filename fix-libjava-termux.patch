@@ -1,0 +1,20 @@
+--- jdk/src/solaris/bin/java_md_solinux.c	2022-06-22 08:25:04.996696237 +0800
++++ /data/data/com.termux/files/home/java_md_solinux.c	2022-06-22 08:42:39.486695835 +0800
+@@ -992,7 +992,7 @@
+             } else {
+               /* Fake it as best we can or should we punt? */
+               JLI_TraceLauncher("SetExecName fake it = %s\n", argv[0]);
+-              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
++              JLI_Snprintf(buf, PATH_MAX, "/data/data/com.termux/files/usr/opt/openjdk-8/bin/java",
+                            argv[0]);
+             }
+           }
+@@ -1004,7 +1004,7 @@
+             } else {
+               /* Fake it as best we can or should we punt? */
+               JLI_TraceLauncher("SetExecName fake it 2 = %s\n", argv[0]);
+-              JLI_Snprintf(buf, PATH_MAX, "/data/data/%s/storage/jvm/bin/java",
++              JLI_Snprintf(buf, PATH_MAX, "/data/data/com.termux/files/usr/opt/openjdk-8/bin/java",
+                            argv[0]);
+             }
+         }

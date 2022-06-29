@@ -44,8 +44,8 @@ else
   ln -s -f /opt/X11/include/X11 $ANDROID_INCLUDE/
   platform_args="--with-toolchain-type=clang"
   # --disable-precompiled-headers
-  AUTOCONF_x11arg="--with-x=/opt/X11/include/X11 --prefix=/data/data/bin.mt.plus/files/term/usr/share/openjdk-8"
-  sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration -Wl,-rpath=/data/data/bin.mt.plus/files/term/usr/share/openjdk-8/lib"
+  AUTOCONF_x11arg="--with-x=/opt/X11/include/X11 --prefix=/data/data/com.termux/files/usr/opt/openjdk-8"
+  sameflags="-arch arm64 -isysroot $thesysroot -miphoneos-version-min=12.0 -DHEADLESS=1 -I$PWD/ios-missing-include -Wno-implicit-function-declaration -Wl,-rpath=/data/data/com.termux/files/usr/opt/openjdk-8/jre/lib/aarch64"
   export CFLAGS+=" $sameflags"
   export CXXFLAGS="$sameflags"
   export LDFLAGS+=" -miphoneos-version-min=12.0"
@@ -58,7 +58,7 @@ ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
 
 cd openjdk
 #rm -rf build
-patch -p0 -i ../fix-libjava.patch
+patch -p0 -i ../fix-libjava-termux.patch
 #   --with-extra-cxxflags="$CXXFLAGS -Dchar16_t=uint16_t -Dchar32_t=uint32_t" \
 #   --with-extra-cflags="$CPPFLAGS" \
 #   --with-sysroot="$(xcrun --sdk iphoneos --show-sdk-path)" \
@@ -70,7 +70,7 @@ bash ./configure \
     --openjdk-target=$TARGET_PHYS \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
-    --with-extra-ldflags="$LDFLAGS" \
+    --with-extra-ldflags="$LDFLAGS -rpath=/data/data/com.termux/files/usr/opt/openjdk-8/hre/lib/aarch64" \
     --enable-option-checking=fatal \
     --with-jdk-variant=normal \
     --with-jvm-variants="${JVM_VARIANTS/AND/,}" \
