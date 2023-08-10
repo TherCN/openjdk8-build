@@ -4,11 +4,11 @@ set -e
 if [ "$BUILD_IOS" != "1" ]; then
 
 unset AR AS CC CXX LD OBJCOPY RANLIB STRIP CPPFLAGS LDFLAGS
-git clone https://github.com/termux/termux-elf-cleaner
-cd termux-elf-cleaner
-make CFLAGS=__ANDROID_API__=24 termux-elf-cleaner
-chmod +x termux-elf-cleaner
-cd ..
+#git clone https://github.com/termux/termux-elf-cleaner
+#cd termux-elf-cleaner
+#make CFLAGS=__ANDROID_API__=24 termux-elf-cleaner
+#chmod +x termux-elf-cleaner
+#cd ..
 
 findexec() { find $1 -type f -name "*" -not -name "*.o" -exec sh -c '
     case "$(head -n 1 "$1")" in
@@ -20,8 +20,8 @@ exit 1
 ' sh {} \; -print
 }
 
-findexec jreout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
-findexec jdkout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
+#findexec jreout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
+#findexec jdkout | xargs -- ./termux-elf-cleaner/termux-elf-cleaner
 
 fi
 
