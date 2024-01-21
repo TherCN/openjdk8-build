@@ -31,7 +31,7 @@ if [ "$BUILD_IOS" != "1" ]; then
 
   ln -s -f /usr/include/X11 $ANDROID_INCLUDE/
   ln -s -f /usr/include/fontconfig $ANDROID_INCLUDE/
-  AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11 --prefix=/data/data/com.termux/files/usr/opt/openjdk-8"
+  AUTOCONF_x11arg="--x-includes=$ANDROID_INCLUDE/X11"
 
   export LDFLAGS+=" -L`pwd`/dummy_libs "
 
@@ -53,7 +53,7 @@ else
   HOMEBREW_NO_AUTO_UPDATE=1 brew install ldid xquartz
 fi
 
-  OTHER_FLAGS="-Wl,-rpath=/data/data/com.termux/files/usr/opt/openjdk-8/hre/lib/aarch64"
+  #OTHER_FLAGS="-Wl,-rpath=/data/data/com.termux/files/usr/opt/openjdk-8/hre/lib/aarch64"
 # fix building libjawt
 ln -s -f $CUPS_DIR/cups $ANDROID_INCLUDE/
 
@@ -71,7 +71,7 @@ bash ./configure \
     --openjdk-target=$TARGET_PHYS \
     --with-extra-cflags="$CFLAGS" \
     --with-extra-cxxflags="$CFLAGS" \
-    --with-extra-ldflags="$LDFLAGS $OTHER_FLAGS" \
+    --with-extra-ldflags="$LDFLAGS" \
     --enable-option-checking=fatal \
     --with-jdk-variant=normal \
     --with-jvm-variants="${JVM_VARIANTS/AND/,}" \
